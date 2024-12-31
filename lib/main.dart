@@ -282,19 +282,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           'http://localhost:8201/canvas/${canvas['id']}'));
 
                       if (canvasResponse.statusCode == 200) {
-                      // Decode the response as a Map<String, dynamic>
-    final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
-    // Get the stringified list from the 'data' field
-    String colorData = responseBody['data'];
-
-    // Decode the stringified list into a List<int>
-    List<int> colorList = List<int>.from(jsonDecode(colorData));
-
-    setState(() {
-      // Map the List<int> to List<Color>
-      pixels = colorList.map((color) => Color(color)).toList();
-    });
+                        final Map<String, dynamic> responseBody =
+                            jsonDecode(canvasResponse.body)
+                                as Map<String, dynamic>;
+                        String colorData = responseBody['data'] as String;
+                        List<int> colorList =
+                            (jsonDecode(colorData) as List<dynamic>)
+                                .map((e) => e as int)
+                                .toList();
+                        setState(() {
+                          pixels =
+                              colorList.map((color) => Color(color)).toList();
+                        });
                       }
                       Navigator.of(context).pop();
                     },
