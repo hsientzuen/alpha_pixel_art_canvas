@@ -6,10 +6,10 @@ const mysql = require('mysql2');
 const app = express();
 const PORT = 8201;
 const db = mysql.createConnection({
-    host: '45.127.6.146',
-    user: 'alpha',
-    password: 'mS9a8p0*6',
-    database: 'alpha'
+    host: '*',
+    user: '*',
+    password: '*',
+    database: '*'
 });
 
 db.connect((err) => {
